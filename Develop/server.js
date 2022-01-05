@@ -15,7 +15,7 @@ app.get('/notes', (req,res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-  const data = fs.readFileSync('./db/db,json', 'utf8');
+  const data = fs.readFileSync('./db/db.json', 'utf8');
   const notes = JSON.parse(data);
   res.json(notes);
 })
@@ -36,6 +36,7 @@ app.delete('/api/notes/:id', (req, res) => {
   const notes = JSON.parse(data).filter(n => n.id !== id);
   const newNotes = JSON.stringify(notes, null, 2);
   fs.writeFileSync('./db/db.json', newNotes);
+  res.json('sucess');
 });
 
 app.listen(PORT, ()  => console.log('listening on http://localhost:' + PORT));
